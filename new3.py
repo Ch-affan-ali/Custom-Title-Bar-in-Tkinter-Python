@@ -28,7 +28,7 @@ win.config(bg=color3)
 win.config(highlightbackground=color2)
 win.geometry("1366x728+0+0")
 win.title("Calculator")
-win.iconbitmap(r"C:\Users\Mian G\PycharmProjects\Math\wd.ico")
+win.iconbitmap("wd.ico")
 
 # endregion
 
