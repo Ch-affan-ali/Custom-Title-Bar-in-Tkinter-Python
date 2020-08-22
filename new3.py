@@ -1,317 +1,208 @@
-import tkinter
+# region Imports
+
 from tkinter import *
+from tkinter import ttk
+
+# endregion
 
 
-window=Tk()
-window.resizable(0, 0)
 
-window.geometry('1100x696+90+25')
-window.overrideredirect(1)
-window.config(bg='#1e1e1e')
+# region Color Used
+
+color1 = '#252526'
+color2 = '#3c3c3c'
+color3 = '#1e1e1e'
+color4 = '#cccccc'
+color5 = '#333333'
+color6 = '#2A2D2E'
+
+# endregion
 
 
-#(Start) To Make Window Dragable
+
+# region Main Window Settings
+
+win = Tk()
+win.overrideredirect(1)
+win.config(bg=color3)
+win.config(highlightbackground=color2)
+win.geometry("1366x728+0+0")
+win.title("Calculator")
+win.iconbitmap(r"C:\Users\Mian G\PycharmProjects\Math\wd.ico")
+
+# endregion
+
+
+
+
+# region Title Bar Frame
+
+title_bar = Frame(win, width=1366, height=29, bg=color2)
+title_bar.place(x=0, y=0)
+
+# endregion F
+
+
+
+# region Drag Window
 
 lastClickX = 0
 lastClickY = 0
 
-def SaveLastClickPos(event):
+
+def savelastclickpos(event):
+
     global lastClickX, lastClickY
     lastClickX = event.x
     lastClickY = event.y
 
-def Dragging(event):
-    x, y = event.x - lastClickX + window.winfo_x(), event.y - lastClickY + window.winfo_y()
-    window.geometry("+%s+%s" % (x , y))
 
-window.attributes('-topmost', True)
-window.bind('<Button-1>', SaveLastClickPos)
-window.bind('<B1-Motion>', Dragging)
-
-#(End) To Make Window DragAble
-
-
-class window2:
-    def __init__(self, master, *args, **kwargs):
-        self.master= master
-
-        #TitleBar Main
-        self.titlebar = Frame(master, height=31, width=1100, bg="#3c3c3c")
-        self.titlebar.pack()
-
-        def restore():
-            self.titlebar2.destroy()
-            self.titlebar = Frame(master, height=31, width=1100, bg="#3c3c3c")
-            self.titlebar.pack()
-            window.geometry('1100x696+90+25')
-            def maxl2(e):
-
-                self.photo200 = PhotoImage(file=r'G:\Store Management Software Development\tkinter\new project\Untitled2.png')
-                self.closebutton2 = Button(self.titlebar, image=self.photo200, bd=0, activebackground='#3c3c3c', bg='#3c3c3c', command=window.destroy)
-                self.closebutton2.place(x=1054, y=1)
-                self.closebutton2.bind("<Enter>", maxh2)
-
-            def maxh2(e):
+def dragging(event):
 
-                self.photo90 = PhotoImage(file = r'G:\Store Management Software Development\tkinter\new project\button2.png')
-                self.closebutton2 = Button(self.titlebar, image=self.photo90, bd=0, activebackground='#3c3c3c', bg='#3c3c3c', command=window.destroy, highlightcolor="#000000")
-                self.closebutton2.place(x=1054, y=0)
-                self.closebutton2.bind("<Leave>", maxl2)
-
-        
-         
-            self.photo = PhotoImage(file = r'G:\Store Management Software Development\tkinter\new project\Untitled2.png')
-            self.closebutton2= Button(self.titlebar, image=self.photo, bd=0, activebackground='#3c3c3c', bg='#3c3c3c', command=window.destroy)
-            self.closebutton2.place(x=1054, y=1)
-            self.closebutton2.bind("<Enter>", maxh2)
+    x, y = event.x - lastClickX + win.winfo_x(), event.y - lastClickY + win.winfo_y()
+    win.geometry("+%s+%s" % (x, y))
 
-
-            def maxl(e):
 
-                self.photo20 = PhotoImage(file = r'G:\Store Management Software Development\tkinter\new project\smallrestore1.png')
-                self.maximize= Button(self.titlebar, image=self.photo20, bd=0, activebackground='#3c3c3c', bg='#3c3c3c', command=fullscreen)
-                self.maximize.place(x=1008, y=0)
-                self.maximize.bind("<Enter>", maxh)
+win.attributes('-topmost', True)
+title_bar.bind('<Button-1>', savelastclickpos)
+title_bar.bind('<B1-Motion>', dragging)
 
-            def maxh(e):
+# endregion
 
-                self.photo9= PhotoImage(file = r'G:\Store Management Software Development\tkinter\new project\smallrestore.png')
-                self.maximize= Button(self.titlebar, image=self.photo9, bd=0, activebackground='#3c3c3c', bg='#3c3c3c', command=fullscreen)
-                self.maximize.place(x=1008, y=0)
-                self.maximize.bind("<Leave>", maxl)
 
-     
-            self.photo2 = PhotoImage(file = r'G:\Store Management Software Development\tkinter\new project\smallrestore1.png')
-            self.maximize= Button(self.titlebar, image=self.photo2, bd=0, activebackground='#3c3c3c', bg='#3c3c3c', command=fullscreen)
-            self.maximize.place(x=1008, y=0)
-            self.maximize.bind("<Enter>", maxh)
+# region Buttons Images Imports
 
-            def show_screen(event):
-                window.deiconify()
-                window.overrideredirect(1)
+photo1 = PhotoImage(file='close.png')
+photo2 = PhotoImage(file='close_mouse.png')
+photo3 = PhotoImage(file='minimize.png')
+photo4 = PhotoImage(file='minimize_mouse.png')
+photo5 = PhotoImage(file='restore.png')
+photo6 = PhotoImage(file='restore_mouse.png')
+photo7 = PhotoImage(file='maximize.png')
+photo8 = PhotoImage(file='maximize_mouse.png')
+photo10 = PhotoImage(file='all.png')
+photo11 = PhotoImage(file='all_mouse.png')
+photo12 = PhotoImage(file='search.png')
+photo13 = PhotoImage(file='search_mouse.png')
+photo14 = PhotoImage(file='setting.png')
+photo15 = PhotoImage(file='setting_mouse.png')
 
-            def hide_screen():
-                window.overrideredirect(0)
-                window.iconify()
+# endregion
 
-            def screen_appear(event):
-                window.overrideredirect(1)
 
 
-            def maxl3(e):
+# region Close Button
 
-                self.photo208 = PhotoImage(file = r'G:\Store Management Software Development\tkinter\new project\minimize2.png')
-                self.minimize= Button(self.titlebar, image=self.photo208, bd=0, activebackground='#3c3c3c', bg='#3c3c3c', command=hide_screen)
-                self.minimize.place(x=962, y=0)
-                self.minimize.bind("<Enter>", maxh3)
 
-            def maxh3(e):
+def close_h(e):
+    close_button.config(image=photo2)
 
-                self.photo909= PhotoImage(file = r'G:\Store Management Software Development\tkinter\new project\minimize.png')
-                self.minimize= Button(self.titlebar, image=self.photo909, bd=0, activebackground='#3c3c3c', bg='#3c3c3c', command=hide_screen)
-                self.minimize.place(x=962, y=0)
-                self.minimize.bind("<Leave>", maxl3)
 
+def close_l(e):
+    close_button.config(image=photo1)
 
-            self.photo540 = PhotoImage(file = r'G:\Store Management Software Development\tkinter\new project\minimize2.png')
-            self.minimize= Button(self.titlebar, image=self.photo540, bd=0, activebackground='#3c3c3c', bg='#3c3c3c')
-            self.minimize.place(x=962, y=0)
-            self.minimize.bind("<Enter>", maxh3)
-            self.titlebar.bind("<Button-3>", show_screen)
-            self.titlebar.bind("<Map>", screen_appear)
-        
-        
-        
-        
-        #After Clicking Maximize Button
-        def fullscreen():
-                
-            self.titlebar.destroy()
-            window.geometry("1366x728+0+0")
-            
-            
-            self.titlebar2 = Frame(master, height=29, width=1366, bg="#3c3c3c")
-            self.titlebar2.pack()
 
+close_button = Button(title_bar, image=photo1, bd=0, bg=color2, activebackground=color2, command=win.destroy)
+close_button.place(x=1320, y=0)
+close_button.bind("<Enter>", close_h)
+close_button.bind("<Leave>", close_l)
 
-            
-            #START Close Button Full Screen
-            def maxl6(e):
+# endregion
 
-                self.photo411 = PhotoImage(file = r'G:\Store Management Software Development\tkinter\new project\Untitled2.png')
-                self.closebutton5= Button(self.titlebar2, image=self.photo411, bd=0, activebackground='#3c3c3c', bg='#3c3c3c', command=window.destroy)
-                self.closebutton5.place(x=1321, y=0)
-                self.closebutton5.bind("<Enter>", maxh6)
 
-            def maxh6(e):
 
-                self.photo412= PhotoImage(file = r'G:\Store Management Software Development\tkinter\new project\button2.png')
-                self.closebutton5= Button(self.titlebar2, image=self.photo412, bd=0, activebackground='#3c3c3c', bg='#3c3c3c', command=window.destroy)
-                self.closebutton5.place(x=1321, y=0)
-                self.closebutton5.bind("<Leave>", maxl6)
+# region Maximize Button
 
 
-            self.photo3 = PhotoImage(file= r'G:\Store Management Software Development\tkinter\new project\Untitled2.png')
-            self.closebutton5 = Button(self.titlebar2, image=self.photo3, bd=0, activebackground='#3c3c3c', bg='#3c3c3c', command=window.destroy)
-            self.closebutton5.place(x=1321, y=0)
-            self.closebutton5.bind("<Enter>", maxh6)
-            #END Close Button Full Screen
+def maximize():
+    win.geometry("1366x728+0+0")
+    title_bar.config(width=1366)
+    maximize_button.place_forget()
+    close_button.place(x=1320, y=0)
+    minimize_button.place(x=1228, y=0)
+    # title.place(x=614, y=4)
 
 
-            #START Restore Down Button Full Screen
-            def maxl5(e):
 
-                self.photo297 = PhotoImage(file = r'G:\Store Management Software Development\tkinter\new project\Untitled.png')
-                self.maximize6= Button(self.titlebar2, image=self.photo297, bd=0, activebackground='#3c3c3c', bg='#3c3c3c', command=restore)
-                self.maximize6.place(x=1275, y=0)
-                self.maximize6.bind("<Enter>", maxh5)
+def maximize_h(e):
 
-            def maxh5(e):
+    maximize_button.config(image=photo8)
 
-                self.photo2970= PhotoImage(file = r'G:\Store Management Software Development\tkinter\new project\restore3.png')
-                self.maximize6= Button(self.titlebar2, image=self.photo2970, bd=0, activebackground='#3c3c3c', bg='#3c3c3c', command=restore)
-                self.maximize6.place(x=1275, y=0)
-                self.maximize6.bind("<Leave>", maxl5)
 
+def maximize_l(e):
+    maximize_button.config(image=photo7)
 
-            self.photo402 = PhotoImage(file = r'G:\Store Management Software Development\tkinter\new project\Untitled.png')
-            self.maximize6 = Button(self.titlebar2, image=self.photo402, bd=0, activebackground='#3c3c3c', bg='#3c3c3c', command=restore)
-            self.maximize6.place(x=1275, y=0)
-            self.maximize6.bind("<Enter>", maxh5)
-            #END Restore Down Button Full Screen
 
+maximize_button = Button(title_bar, image=photo7, bd=0, bg=color2, activebackground=color2, command=maximize)
+maximize_button.bind("<Enter>", maximize_h)
+maximize_button.bind("<Leave>", maximize_l)
+# endregion
 
 
 
-            #START Minimize button Full Screen
-            def show_screen(event):
-                window.deiconify()
-                window.overrideredirect(1)
 
-            def hide_screen():
-                window.overrideredirect(0)
-                window.iconify()
+# region Restore Down Button
 
-            def screen_appear(event):
-                window.overrideredirect(1)
 
-            def maxl4(e):
+def restore():
 
-                self.photo2087 = PhotoImage(file = r'G:\Store Management Software Development\tkinter\new project\minimize2.png')
-                self.minimize2= Button(self.titlebar2, image=self.photo2087, bd=0, activebackground='#3c3c3c', bg='#3c3c3c', command=hide_screen)
-                self.minimize2.place(x=1229, y=0)
-                self.minimize2.bind("<Enter>", maxh4)
+    win.geometry("1100x696+90+25")
+    title_bar.config(width=1100)
+    close_button.place(x=1054, y=0)
+    maximize_button.place(x=1008, y=0)
+    minimize_button.place(x=962, y=0)
+    # title.place(x=500, y=4)
 
-            def maxh4(e):
 
-                self.photo909= PhotoImage(file = r'G:\Store Management Software Development\tkinter\new project\minimize.png')
-                self.minimize2= Button(self.titlebar2, image=self.photo909, bd=0, activebackground='#3c3c3c', bg='#3c3c3c', command=hide_screen)
-                self.minimize2.place(x=1229, y=0)
-                self.minimize2.bind("<Leave>", maxl4)
+def restore_h(e):
 
+    restore_button.config(image=photo6)
 
-            self.photo540 = PhotoImage(file = r'G:\Store Management Software Development\tkinter\new project\minimize2.png')
-            self.minimize2= Button(self.titlebar2, image=self.photo540, bd=0, activebackground='#3c3c3c', bg='#3c3c3c')
-            self.minimize2.place(x=1229, y=0)
-            self.minimize2.bind("<Enter>", maxh4)
-            self.titlebar2.bind("<Button-3>", show_screen)
-            self.titlebar2.bind("<Map>", screen_appear)
-            #END Minimize Button Full Screen
 
+def restore_l(e):
+    restore_button.config(image=photo5)
 
 
+restore_button = Button(title_bar, image=photo5, bd=0, bg=color2, activebackground=color2, command=restore)
+restore_button.place(x=1274, y=0)
+restore_button.bind("<Enter>", restore_h)
+restore_button.bind("<Leave>", restore_l)
+# endregion
 
 
 
+# region Minimize Button
 
-        # START Close Button Small Screen
-        def maxl2(e):
 
-            self.photo200 = PhotoImage(file = r'G:\Store Management Software Development\tkinter\new project\Untitled2.png')
-            self.closebutton2= Button(self.titlebar, image=self.photo200, bd=0, activebackground='#3c3c3c', bg='#3c3c3c', command=window.destroy)
-            self.closebutton2.place(x=1054, y=1)
-            self.closebutton2.bind("<Enter>", maxh2)
+def show_screen(event):
+    win.deiconify()
+    win.overrideredirect(1)
 
-        def maxh2(e):
 
-            self.photo90= PhotoImage(file = r'G:\Store Management Software Development\tkinter\new project\button2.png')
-            self.closebutton2= Button(self.titlebar, image=self.photo90, bd=0, activebackground='#3c3c3c', bg='#3c3c3c', command=window.destroy, highlightcolor="#000000")
-            self.closebutton2.place(x=1054, y=0)
-            self.closebutton2.bind("<Leave>", maxl2)
+def hide_screen():
+    win.overrideredirect(0)
+    win.iconify()
 
-        
-         
-        self.photo = PhotoImage(file = r'G:\Store Management Software Development\tkinter\new project\Untitled2.png')
-        self.closebutton2= Button(self.titlebar, image=self.photo, bd=0, activebackground='#3c3c3c', bg='#3c3c3c', command=window.destroy)
-        self.closebutton2.place(x=1054, y=1)
-        self.closebutton2.bind("<Enter>", maxh2)
-        #END Close Button Small Screen
 
+def screen_appear(event):
+    win.overrideredirect(1)
 
 
-        #START Maximize Button Small Screen 
-        def maxl(e):
+def minimize_h(e):
+    minimize_button.config(image=photo4)
 
-            self.photo20 = PhotoImage(file = r'G:\Store Management Software Development\tkinter\new project\smallrestore1.png')
-            self.maximize= Button(self.titlebar, image=self.photo20, bd=0, activebackground='#3c3c3c', bg='#3c3c3c', command=fullscreen)
-            self.maximize.place(x=1008, y=0)
-            self.maximize.bind("<Enter>", maxh)
 
-        def maxh(e):
+def minimize_l(e):
+    minimize_button.config(image=photo3)
 
-            self.photo9= PhotoImage(file = r'G:\Store Management Software Development\tkinter\new project\smallrestore.png')
-            self.maximize= Button(self.titlebar, image=self.photo9, bd=0, activebackground='#3c3c3c', bg='#3c3c3c', command=fullscreen)
-            self.maximize.place(x=1008, y=0)
-            self.maximize.bind("<Leave>", maxl)
 
-     
-        self.photo2 = PhotoImage(file = r'G:\Store Management Software Development\tkinter\new project\smallrestore1.png')
-        self.maximize= Button(self.titlebar, image=self.photo2, bd=0, activebackground='#3c3c3c', bg='#3c3c3c', command=fullscreen)
-        self.maximize.place(x=1008, y=0)
-        self.maximize.bind("<Enter>", maxh)
-        #END Maximize Button Small Screen 
+minimize_button = Button(title_bar, image=photo3, bd=0, bg=color2, activebackground=color2, command=hide_screen)
+minimize_button.place(x=1230, y=0)
+minimize_button.bind("<Enter>", minimize_h)
+minimize_button.bind("<Leave>", minimize_l)
+title_bar.bind("<Button-3>", show_screen)
+title_bar.bind("<Map>", screen_appear)
 
+# endregion
 
-        #START Minimize Buttton Small Screen 
-        def show_screen(event):
-            window.deiconify()
-            window.overrideredirect(1)
-
-        def hide_screen():
-            window.overrideredirect(0)
-            window.iconify()
-
-        def screen_appear(event):
-            window.overrideredirect(1)
-
-            
-        def maxl3(e):
-
-            self.photo208 = PhotoImage(file = r'G:\Store Management Software Development\tkinter\new project\minimize2.png')
-            self.minimize= Button(self.titlebar, image=self.photo208, bd=0, activebackground='#3c3c3c', bg='#3c3c3c', command=hide_screen)
-            self.minimize.place(x=962, y=0)
-            self.minimize.bind("<Enter>", maxh3)
-
-        def maxh3(e):
-
-            self.photo909= PhotoImage(file = r'G:\Store Management Software Development\tkinter\new project\minimize.png')
-            self.minimize= Button(self.titlebar, image=self.photo909, bd=0, activebackground='#3c3c3c', bg='#3c3c3c', command=hide_screen)
-            self.minimize.place(x=962, y=0)
-            self.minimize.bind("<Leave>", maxl3)
-
-
-        self.photo540 = PhotoImage(file = r'G:\Store Management Software Development\tkinter\new project\minimize2.png')
-        self.minimize= Button(self.titlebar, image=self.photo540, bd=0, activebackground='#3c3c3c', bg='#3c3c3c')
-        self.minimize.place(x=962, y=0)
-        self.minimize.bind("<Enter>", maxh3)
-        self.titlebar.bind("<Button-3>", show_screen)
-        self.titlebar.bind("<Map>", screen_appear)
-        #END Minimize Button Small Screen
-
-
-    
-    
-
-r= window2(window)
-
-window.mainloop()
+win.mainloop()
