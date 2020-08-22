@@ -80,12 +80,7 @@ photo5 = PhotoImage(file='restore.png')
 photo6 = PhotoImage(file='restore_mouse.png')
 photo7 = PhotoImage(file='maximize.png')
 photo8 = PhotoImage(file='maximize_mouse.png')
-photo10 = PhotoImage(file='all.png')
-photo11 = PhotoImage(file='all_mouse.png')
-photo12 = PhotoImage(file='search.png')
-photo13 = PhotoImage(file='search_mouse.png')
-photo14 = PhotoImage(file='setting.png')
-photo15 = PhotoImage(file='setting_mouse.png')
+
 
 # endregion
 
